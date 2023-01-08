@@ -26,9 +26,10 @@ jobs:
   build_and_push_to_dockerhub:
     runs-on: ubuntu-latest
     steps:
+     - uses: actions/checkout@v3 
      - name: Dockerhub login
        run: echo $DOCKER_PASSWORD | docker login -u aliaksandrdub --password-stdin        
      - name: Build dockerhub image
-       run: docker build -t ghcr.io/aliaksandrdub/test:latest .        
+       run: docker build -t aliaksandrdub/docker_hi:latest .        
      - name: Push dockerhub image
-       run: docker push ghcr.io/aliaksandrdub/test:latest
+       run: docker push aliaksandrdub/docker_hi:latest
