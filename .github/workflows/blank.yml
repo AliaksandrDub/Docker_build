@@ -10,7 +10,7 @@ env:
   SLACK_CHANNEL: my-project-home_slack_notification
   SLACK_COLOR: 'green'
   SLACK_ICON: https://github.com/rtCamp.png?size=48
-  SLACK_MESSAGE: 'Pushing docker_hi:${{ steps.date.outputs.date }}_${{ github.run_number }} image is SUCCESS'
+#  SLACK_MESSAGE: 'Pushing docker_hi:${{ steps.date.outputs.date }}_${{ github.run_number }} image is SUCCESS'
   SLACK_TITLE: Post Title
   SLACK_USERNAME: rtCamp
   SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK }}          
