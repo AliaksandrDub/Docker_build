@@ -15,35 +15,20 @@ jobs:
   build_and_push_to_github:
     runs-on: ubuntu-latest
     steps:
-     - uses: actions/checkout@v3    
-     - name: test
-       run: printenv      
+     - uses: actions/checkout@v3          
      - name: Docker login
        run: echo $DOCKER_TOKEN | docker login ghcr.io -u USERNAME --password-stdin        
      - name: Build docker image
        run: docker build -t ghcr.io/aliaksandrdub/test:latest .        
      - name: Push docker image
        run: docker push ghcr.io/aliaksandrdub/test:latest
+       
+  build_and_push_to_dockerhub:
+    runs-on: ubuntu-latest
+    steps:
      - name: Dockerhub login
        run: echo $DOCKER_PASSWORD | docker login -u aliaksandrdub --password-stdin        
      - name: Build dockerhub image
        run: docker build -t ghcr.io/aliaksandrdub/test:latest .        
      - name: Push dockerhub image
        run: docker push ghcr.io/aliaksandrdub/test:latest
-
-          
-#  build_and_push_to_dockerhub:
-#      runs-on: ubuntu-latest
-#    steps:
-#      - uses: docker/setup-qemu-action@v2
-#      - uses: docker/setup-buildx-action@v2
-#      - name: Login to Docker Hub
-#        uses: docker/login-action@v2
-#        with:
-#          username: ${{ secrets.GH_USERNAME }}
-#          password: ${{ secrets.CR_TOKEN }}
-#      - name: Build and push
-#        uses: docker/build-push-action@v3
-#        with:
-#          push: true
-#          tags: user/app:latest
