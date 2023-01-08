@@ -18,7 +18,7 @@ jobs:
         run: printenv
       
       - name: Docker login
-        run: echo $CR_PAT | docker login ghcr.io -u USERNAME --password-stdin
+        run: echo $CR_TOKEN | docker login ghcr.io -u USERNAME --password-stdin
         
       - name: Build docker image
         run: docker build -t ghcr.io/aliaksandrdub/test:latest .
