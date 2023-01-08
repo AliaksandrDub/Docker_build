@@ -25,7 +25,7 @@ jobs:
      - name: Push docker image
        run: docker push ghcr.io/aliaksandrdub/test:latest
      - name: Dockerhub login
-       run: echo $DOCKER_PASSWORD | docker login ghcr.io -u USERNAME --password-stdin        
+       run: echo $DOCKER_PASSWORD | docker login -u aliaksandrdub --password-stdin        
      - name: Build dockerhub image
        run: docker build -t ghcr.io/aliaksandrdub/test:latest .        
      - name: Push dockerhub image
