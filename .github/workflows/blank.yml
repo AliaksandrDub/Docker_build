@@ -27,13 +27,13 @@ jobs:
        uses: rtCamp/action-slack-notify@v2
        if: success()
        env:
-        SLACK_CHANNEL: my-project-home
-        SLACK_COLOR: 'green'
-        SLACK_ICON: https://github.com/rtCamp.png?size=48
-        SLACK_MESSAGE: 'Pushing docker_hi:${{ steps.date.outputs.date }}_${{ github.run_number }} image is SUCCESS'
-        SLACK_TITLE: Post Title
-        SLACK_USERNAME: rtCamp
-        SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK }}   
+            SLACK_CHANNEL: my-project-home
+            SLACK_COLOR: ${{ job.status }}
+            SLACK_ICON: https://github.com/rtCamp.png?size=48
+            SLACK_MESSAGE: 'Post Content :rocket:'
+            SLACK_TITLE: 'Image was succesfully pushed. Tag: ${{ env.IMAGE }}-${{ github.sha }}-${{ github.run_number }}'
+            SLACK_USERNAME: rtCamp
+            SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK }} 
      - name: Slack FAIL notification
        uses: rtCamp/action-slack-notify@v2
        if: failure()
