@@ -25,6 +25,9 @@ jobs:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v3
 
+      - name: Docker login
+        run: echo $CR_PAT | docker login ghcr.io -u USERNAME --password-stdin
+
       # Runs a single command using the runners shell
       - name: Build docker image
         run: docker build -t ghcr.io/aliaksandrdub/new_image_name:latest .
