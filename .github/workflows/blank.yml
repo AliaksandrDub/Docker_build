@@ -28,3 +28,6 @@ jobs:
       # Runs a single command using the runners shell
       - name: Build docker image
         run: docker build -t ghcr.io/aliaksandrdub/new_image_name:latest .
+      
+      - name: Push docker image
+        run: docker push ghcr.io/aliaksandrdub/new_image_name:latest
