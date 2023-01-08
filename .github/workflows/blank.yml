@@ -7,6 +7,13 @@ on:
     branches: [ "main" ]
   
 env:
+  SLACK_CHANNEL: my-project-home_slack_notification
+  SLACK_COLOR: 'green'
+  SLACK_ICON: https://github.com/rtCamp.png?size=48
+  SLACK_MESSAGE: 'Pushing docker_hi:${{ steps.date.outputs.date }}_${{ github.run_number }} image is SUCCESS'
+  SLACK_TITLE: Post Title
+  SLACK_USERNAME: rtCamp
+  SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK }}          
   DOCKER_USER: ${{secrets.GH_USERNAME}}
   DOCKER_TOKEN: ${{secrets.CR_TOKEN}}
   DOCKER_PASSWORD: ${{secrets.DH_PASS}}
@@ -22,6 +29,12 @@ jobs:
        run: docker build -t ghcr.io/aliaksandrdub/test:latest .        
      - name: Push docker image
        run: docker push ghcr.io/aliaksandrdub/test:latest
+     - name: Slack OK notification
+       uses: rtCamp/action-slack-notify@v2
+       if: success()
+     - name: Slack FAIL notification
+       uses: rtCamp/action-slack-notify@v2
+       if: failure()
        
   build_and_push_to_dockerhub:
     runs-on: ubuntu-latest
@@ -32,28 +45,10 @@ jobs:
      - name: Build dockerhub image
        run: docker build -t aliaksandrdub/docker_hi:latest .        
      - name: Push dockerhub image
-       run: docker push aliaksandrdub/docker_hi:latest
-       
+       run: docker push aliaksandrdub/docker_hi:latest       
      - name: Slack OK notification
        uses: rtCamp/action-slack-notify@v2
        if: success()
-       env:
-         SLACK_CHANNEL: my-project-home_slack_notification
-         SLACK_COLOR: 'green'
-         SLACK_ICON: https://github.com/rtCamp.png?size=48
-         SLACK_MESSAGE: 'Pushing docker_hi:${{ steps.date.outputs.date }}_${{ github.run_number }} image is SUCCESS'
-         SLACK_TITLE: Post Title
-         SLACK_USERNAME: rtCamp
-         SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK }}
-          
      - name: Slack FAIL notification
        uses: rtCamp/action-slack-notify@v2
        if: failure()
-       env:
-         SLACK_CHANNEL: my-project-home_slack_notification
-         SLACK_COLOR: 'green'
-         SLACK_ICON: https://github.com/rtCamp.png?size=48
-         SLACK_MESSAGE: 'Pushing docker_hi:${{ steps.date.outputs.date }}_${{ github.run_number }} image is FAIL'
-         SLACK_TITLE: Post Title
-         SLACK_USERNAME: rtCamp
-         SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK }}
