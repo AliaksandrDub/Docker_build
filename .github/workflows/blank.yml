@@ -31,7 +31,7 @@ jobs:
             SLACK_COLOR: ${{ job.status }}
             SLACK_ICON: https://github.com/rtCamp.png?size=48
             SLACK_MESSAGE: 'Post Content :rocket:'
-            SLACK_TITLE: 'Image was succesfully pushed. Tag: ${{ env.IMAGE }}-${{ github.sha }}-${{ github.run_number }}'
+            SLACK_TITLE: 'Image was succesfully pushed. Tag: ${{ github.ref_name }}-${{ github.sha }}-${{ github.run_number }}'
             SLACK_USERNAME: rtCamp
             SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK }} 
      - name: Slack FAIL notification
@@ -56,7 +56,7 @@ jobs:
             SLACK_COLOR: ${{ job.status }}
             SLACK_ICON: https://github.com/rtCamp.png?size=48
             SLACK_MESSAGE: 'Post Content :rocket:'
-            SLACK_TITLE: 'Image was succesfully pushed. Tag: ${{ env.IMAGE }}-${{ github.sha }}-${{ github.run_number }}'
+            SLACK_TITLE: 'Image was succesfully pushed. Tag: ${{ github.ref_name }}-${{ github.sha }}-${{ github.run_number }}'
             SLACK_USERNAME: rtCamp
             SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK }} 
      - name: Slack FAIL notification
