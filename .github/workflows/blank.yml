@@ -20,9 +20,9 @@ jobs:
      - name: Docker login
        run: echo $DOCKER_TOKEN | docker login ghcr.io -u USERNAME --password-stdin        
      - name: Build docker image
-       run: docker build -t ghcr.io/aliaksandrdub/1:latest .        
+       run: docker build -t ghcr.io/aliaksandrdub/1:${{ github.run_number }} .        
      - name: Push docker image
-       run: docker push ghcr.io/aliaksandrdub/1:latest
+       run: docker push ghcr.io/aliaksandrdub/1:${{ github.run_number }}
      - name: Slack OK notification
        uses: rtCamp/action-slack-notify@v2
        if: success()
@@ -45,9 +45,9 @@ jobs:
      - name: Dockerhub login
        run: echo $DOCKER_PASSWORD | docker login -u aliaksandrdub --password-stdin        
      - name: Build dockerhub image
-       run: docker build -t aliaksandrdub/docker_hi:2 .        
+       run: docker build -t aliaksandrdub/docker_hi:${{ github.run_number }} .        
      - name: Push dockerhub image
-       run: docker push aliaksandrdub/docker_hi:2       
+       run: docker push aliaksandrdub/docker_hi:${{ github.run_number }}       
      - name: Slack OK notification
        uses: rtCamp/action-slack-notify@v2
        if: success()
